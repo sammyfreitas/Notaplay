@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Piano virtual educativo para aprender melodias por notas, números e teclado.">
+  <title>NotaPlay | Mini Piano</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="NotaPlay - início">
+      <span class="brand-mark"><i class="fa-solid fa-music"></i></span>
+      <span><strong>NotaPlay</strong><small>mini piano</small></span>
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#piano">Piano</a>
+      <a href="#musicas">Músicas</a>
+      <a href="#como-tocar">Como tocar</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+
+    <div class="top-actions">
+      <div class="socials" aria-label="Redes sociais">
+        <a href="https://www.linkedin.com/in/tony-s-freitas/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://github.com/sammyfreitas" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://x.com/TonySdeFreitas" target="_blank" rel="noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com/anthony_tijuduke/" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/anthonyfreitas78" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://discord.com/channels/@me/1420581698529394870" target="_blank" rel="noreferrer" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+        <a href="https://wa.me/+5521986140005" target="_blank" rel="noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+      <button id="themeToggle" class="icon-btn" type="button" aria-label="Alternar tema"><i class="fa-solid fa-moon"></i></button>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="eyebrow">PROJETO · JAVASCRIPT</div>
+      <h1>Aprenda músicas<br><span>tocando de verdade.</span></h1>
+      <p>Um mini piano no navegador para tocar com mouse, números ou teclado. Escolha uma música, aprenda nota por nota e acompanhe seu desempenho.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#piano"><i class="fa-solid fa-play"></i> Começar a tocar</a>
+        <a class="btn ghost" href="#musicas"><i class="fa-solid fa-list-music"></i> Ver músicas</a>
+      </div>
+      <div class="legend">
+        <span><b>1–7</b> números</span><span><b>Dó–Si</b> notas</span><span><b>C–B</b> cifras</span><span><b>CVBNM,.</b> teclado</span>
+      </div>
+    </section>
+
+    <section id="piano" class="workspace">
+      <aside id="musicas" class="library panel">
+        <div class="section-title">
+          <div><span class="kicker">BIBLIOTECA</span><h2>Músicas</h2></div>
+          <span id="songCount" class="counter"></span>
+        </div>
+        <input id="songSearch" class="search" type="search" placeholder="Buscar música..." aria-label="Buscar música">
+        <div class="filter-block">
+          <label>Dificuldade
+            <select id="levelFilter"><option value="todas">Todas</option><option value="facil">Fácil</option><option value="medio">Médio</option><option value="dificil">Difícil</option></select>
+          </label>
+          <label>Origem
+            <select id="originFilter"><option value="todas">Todas</option><option value="brasileira">Brasileiras</option><option value="internacional">Internacionais</option><option value="americana">Americanas</option><option value="exercicio">Exercícios</option></select>
+          </label>
+          <label>Tipo
+            <select id="typeFilter"><option value="todas">Todos</option><option value="infantil">Infantil</option><option value="cultural">Cultural</option><option value="junina">Junina</option><option value="classica">Clássica</option><option value="natalina">Natalina</option><option value="samba">Samba</option><option value="baiao">Baião</option><option value="pop-rock">Pop/Rock</option><option value="tecnica">Técnica</option><option value="livre">Originais</option></select>
+          </label>
+        </div>
+        <div id="songList" class="song-list"></div>
+      </aside>
+
+      <section class="play-area">
+        <div class="panel song-panel">
+          <div class="song-head">
+            <div>
+              <span id="difficultyBadge" class="badge">FÁCIL</span>
+              <h2 id="songTitle">Cai Cai Balão</h2>
+              <p id="songSubtitle">Tradicional · ótima para começar</p>
+            </div>
+            <div class="mode-switch" aria-label="Modo de jogo">
+              <button data-mode="livre" type="button"><i class="fa-solid fa-music"></i> Livre</button>
+              <button data-mode="aprender" class="active" type="button"><i class="fa-solid fa-graduation-cap"></i> Aprender</button>
+              <button data-mode="ouvir" type="button"><i class="fa-solid fa-headphones"></i> Ouvir</button>
+              <button data-mode="desafio" type="button"><i class="fa-solid fa-trophy"></i> Desafio</button>
+            </div>
+          </div>
+
+          <div class="progress-wrap">
+            <div class="progress-meta"><span id="modeMessage">Toque a nota destacada</span><span id="progressText">0 / 0</span></div>
+            <div class="progress"><span id="progressBar"></span></div>
+          </div>
+
+          <div class="display-controls">
+            <div class="segmented">
+              <span>Mostrar:</span>
+              <button class="display active" data-display="number" type="button">1 2 3</button>
+              <button class="display" data-display="solfege" type="button">Dó Ré Mi</button>
+              <button class="display" data-display="letter" type="button">C D E</button>
+            </div>
+            <label class="speed">Velocidade
+              <select id="speedSelect">
+                <option value="0.5">0,5×</option>
+                <option value="0.75">0,75×</option>
+                <option value="1" selected>1×</option>
+                <option value="1.25">1,25×</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="score-label">PARTITURA SIMPLIFICADA</div>
+          <div id="sequence" class="sequence phrases" aria-label="Sequência da música"></div>
+          <div id="feedback" class="feedback" aria-live="polite">Pronto! Escolha um modo e comece.</div>
+        </div>
+
+        <div class="panel piano-panel">
+          <div class="piano-toolbar">
+            <div class="now-note"><span>PRÓXIMA NOTA</span><strong id="nextNote">SOL · G · 5</strong></div>
+            <div class="stats">
+              <span><small>Acertos</small><b id="hits">0</b></span>
+              <span><small>Erros</small><b id="errors">0</b></span>
+              <span><small>Pontos</small><b id="score">0</b></span>
+            </div>
+          </div>
+
+          <div class="piano-wrap">
+            <div id="keyboard" class="keyboard" aria-label="Teclado do piano">
+              <button class="piano-key" data-note="C4" type="button"><span class="note">Dó</span><span class="code">C · 1</span><kbd>C</kbd></button>
+              <button class="piano-key" data-note="D4" type="button"><span class="note">Ré</span><span class="code">D · 2</span><kbd>V</kbd></button>
+              <button class="piano-key" data-note="E4" type="button"><span class="note">Mi</span><span class="code">E · 3</span><kbd>B</kbd></button>
+              <button class="piano-key" data-note="F4" type="button"><span class="note">Fá</span><span class="code">F · 4</span><kbd>N</kbd></button>
+              <button class="piano-key" data-note="G4" type="button"><span class="note">Sol</span><span class="code">G · 5</span><kbd>M</kbd></button>
+              <button class="piano-key" data-note="A4" type="button"><span class="note">Lá</span><span class="code">A · 6</span><kbd>,</kbd></button>
+              <button class="piano-key" data-note="B4" type="button"><span class="note">Si</span><span class="code">B · 7</span><kbd>.</kbd></button>
+              <button class="piano-key octave" data-note="C5" type="button"><span class="note">Dó</span><span class="code">C5 · 1'</span><kbd>/</kbd></button>
+            </div>
+          </div>
+
+          <div class="piano-actions">
+            <button id="startBtn" class="btn primary" type="button"><i class="fa-solid fa-play"></i> Iniciar</button>
+            <button id="listenChunkBtn" class="btn ghost" type="button"><i class="fa-solid fa-ear-listen"></i> Ouvir trecho</button>
+            <button id="restartBtn" class="btn ghost" type="button"><i class="fa-solid fa-rotate-right"></i> Recomeçar</button>
+          </div>
+          <p class="keyboard-tip"><i class="fa-regular fa-keyboard"></i> Você também pode usar <strong>1 2 3 4 5 6 7</strong> ou <strong>C V B N M , .</strong></p>
+        </div>
+      </section>
+    </section>
+
+    <section id="como-tocar" class="info-grid">
+      <article><span>01</span><h3>Escolha</h3><p>Selecione uma música e a dificuldade.</p></article>
+      <article><span>02</span><h3>Aprenda</h3><p>A tecla correta muda de cor e espera você tocar.</p></article>
+      <article><span>03</span><h3>Pratique</h3><p>Use mouse, números ou as teclas CVBNM,.</p></article>
+      <article><span>04</span><h3>Desafie-se</h3><p>Ganhe pontos por acertos e tente reduzir os erros.</p></article>
+    </section>
+
+    <section id="sobre" class="about panel">
+      <div><span class="kicker">SOBRE O PROJETO</span><h2>Um jeito simples de brincar e aprender música.</h2></div>
+      <p>O NotaPlay foi criado como um experimento educativo em HTML, CSS e JavaScript puro. As notas são geradas no próprio navegador pela Web Audio API.</p>
+      <a class="btn ghost" href="https://sammyfreitas.github.io/portfolio/" target="_blank" rel="noreferrer">Ver portfólio <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Todos os Direitos Reservados © Anthony Freitas</p>
+    <a href="https://sammyfreitas.github.io/portfolio/" target="_blank" rel="noreferrer">Portfólio</a>
+  </footer>
+
+  <script src="js/musicas.js"></script>
+  <script src="js/piano.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
